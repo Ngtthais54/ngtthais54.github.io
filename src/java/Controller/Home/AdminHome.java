@@ -29,6 +29,7 @@ public class AdminHome extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Hello");
         request.getRequestDispatcher("view/AdminHome.jsp").forward(request, response);
     }
 
