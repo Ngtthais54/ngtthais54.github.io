@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Login.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Home/Home.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/RegisterController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Home.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/login/MoneyController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/LoginController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/AdminHome.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Studentmoney.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/login/BookBedController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/BedDBContext.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/StudentDBContext.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Home/AdminHome.java</file>
+        </group>
+    </open-files>
+</project-private>
