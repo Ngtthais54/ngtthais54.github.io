@@ -114,6 +114,7 @@
     <body>
         <header>
             <h1>Welcome to DOM system</h1>
+            <h3>Student</h3>
         </header>
         <div class="container">
             <ul>

@@ -68,6 +68,14 @@
         <servlet-name>AdminHome</servlet-name>
         <servlet-class>Controller.Home.AdminHome</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAdminController</servlet-name>
+        <servlet-class>Controller.login.AddAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>Controller.login.AdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -131,6 +139,14 @@
     <servlet-mapping>
         <servlet-name>AdminHome</servlet-name>
         <url-pattern>/adminhome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdminController</servlet-name>
+        <url-pattern>/addadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
