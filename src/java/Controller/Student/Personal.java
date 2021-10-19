@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
-import Dal.BedDBContext;
-import Model.Bed;
+import Dal.StudentDBContext;
+import Model.Account;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class BedDetailController extends HttpServlet {
+public class Personal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,11 +32,11 @@ public class BedDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String room_code = request.getParameter("id");
-        BedDBContext bedDB = new BedDBContext();
-        ArrayList<Bed> beds = bedDB.getBedByRoomCode(room_code);
-        request.setAttribute("beds", beds);
-        request.getRequestDispatcher("view/Bed.jsp").forward(request, response);
+        StudentDBContext stuDB = new StudentDBContext();
+        Account acc = (Account) request.getSession().getAttribute("acc");
+        Student student = stuDB.getStudentbyUsername(acc.getUsername());
+        request.setAttribute("student", student);
+        request.getRequestDispatcher("view/PersonalInfo.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

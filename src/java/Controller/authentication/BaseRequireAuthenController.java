@@ -6,6 +6,7 @@
 package Controller.authentication;
 
 import Model.Account;
+import Model.Feature;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -29,10 +30,22 @@ public abstract class BaseRequireAuthenController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private boolean isAuthenticated(HttpServletRequest request){
-        Account account = (Account)request.getSession().getAttribute("acc");
-        return true;
-        
+    private boolean isAuthenticated(HttpServletRequest request) {
+       Account account = (Account) request.getSession().getAttribute("acc");
+       boolean isAuthorize = false;
+       if(account == null){
+           return false;
+       } else{
+           String url = request.getServletPath();
+           for (Feature feature : account.getFeatures()) {
+               System.out.println(feature.getUrl() + " " + url);
+               if(feature.getUrl().equals(url)){
+                   isAuthorize = true;
+                   break;
+               }
+           }
+       }
+       return isAuthorize;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,14 +60,16 @@ public abstract class BaseRequireAuthenController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(isAuthenticated(request)){
+        if (isAuthenticated(request)) {
             processGet(request, response);
-        } else{
+        } else {
             response.getWriter().println("Access denined");
         }
     }
+
     protected abstract void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
+
     protected abstract void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
 
@@ -69,9 +84,9 @@ public abstract class BaseRequireAuthenController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(isAuthenticated(request)){
+        if (isAuthenticated(request)) {
             processPost(request, response);
-        } else{
+        } else {
             response.getWriter().println("Access denined");
         }
     }

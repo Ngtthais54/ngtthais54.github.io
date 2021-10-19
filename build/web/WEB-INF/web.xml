@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>Controller.login.LogoutController</servlet-class>
+        <servlet-class>Controller.authentication.LogoutController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Home</servlet-name>
@@ -18,19 +18,19 @@
     </servlet>
     <servlet>
         <servlet-name>AboutController</servlet-name>
-        <servlet-class>Controller.login.AboutController</servlet-class>
+        <servlet-class>Controller.Student.AboutController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Personal</servlet-name>
-        <servlet-class>Controller.login.Personal</servlet-class>
+        <servlet-class>Controller.Student.Personal</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateController</servlet-name>
-        <servlet-class>Controller.login.UpdateController</servlet-class>
+        <servlet-class>Controller.Student.UpdateController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DomDetailController</servlet-name>
-        <servlet-class>Controller.login.DomDetailController</servlet-class>
+        <servlet-class>Controller.Student.DomDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RoomDetailController</servlet-name>
@@ -38,31 +38,31 @@
     </servlet>
     <servlet>
         <servlet-name>StudentPlaceHistoryController</servlet-name>
-        <servlet-class>Controller.login.StudentPlaceHistoryController</servlet-class>
+        <servlet-class>Controller.Student.StudentPlaceHistoryController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BedDetailController</servlet-name>
-        <servlet-class>Controller.login.BedDetailController</servlet-class>
+        <servlet-class>Controller.Student.BedDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HistoryController</servlet-name>
-        <servlet-class>Controller.login.HistoryController</servlet-class>
+        <servlet-class>Controller.Student.HistoryController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StudentRequestController</servlet-name>
-        <servlet-class>Controller.login.StudentRequestController</servlet-class>
+        <servlet-class>Controller.Student.StudentRequestController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateRequestController</servlet-name>
-        <servlet-class>Controller.login.CreateRequestController</servlet-class>
+        <servlet-class>Controller.Student.CreateRequestController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookBedController</servlet-name>
-        <servlet-class>Controller.login.BookBedController</servlet-class>
+        <servlet-class>Controller.Student.BookBedController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MoneyController</servlet-name>
-        <servlet-class>Controller.login.MoneyController</servlet-class>
+        <servlet-class>Controller.Student.MoneyController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminHome</servlet-name>

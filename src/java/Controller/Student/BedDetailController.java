@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
-import Dal.RequestDBContext;
-import Dal.StudentDBContext;
-import Model.Account;
-import Model.Request;
-import Model.Student;
+import Dal.BedDBContext;
+import Model.Bed;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class StudentRequestController extends HttpServlet {
+public class BedDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +30,14 @@ public class StudentRequestController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String room_code = request.getParameter("id");
+        BedDBContext bedDB = new BedDBContext();
+        ArrayList<Bed> beds = bedDB.getBedByRoomCode(room_code);
+        request.setAttribute("beds", beds);
+        request.getRequestDispatcher("view/Bed.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,13 +51,7 @@ public class StudentRequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account acc = (Account) request.getSession().getAttribute("acc");
-        StudentDBContext stuDB = new StudentDBContext();
-        Student student = stuDB.getStudentbyUsername(acc.getUsername());
-        RequestDBContext rDB = new RequestDBContext();
-        ArrayList<Request> requests = rDB.getRequestbyStudentID(student.getId());
-        request.setAttribute("requests", requests);
-        request.getRequestDispatcher("/view/StudentRequest.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -67,7 +65,7 @@ public class StudentRequestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

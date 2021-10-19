@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
-import Dal.RequestDBContext;
-import Dal.StudentDBContext;
-import Model.Account;
-import Model.Request;
-import Model.Student;
+import Dal.DomDBContext;
+import Dal.RoomDBContext;
+import Model.Dom;
+import Model.Room;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class CreateRequestController extends HttpServlet {
+public class DomDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,8 +33,6 @@ public class CreateRequestController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -43,10 +42,22 @@ public class CreateRequestController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected String toGsonObject(String name, String value) {
+        return "{\"" + name + "\" : " + value + "}";
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.sendRedirect("view/CreateRequest.jsp");
+        int id = (request.getParameter("did") == null) ? 1 : Integer.parseInt(request.getParameter("did"));
+        DomDBContext domDB = new DomDBContext();
+        RoomDBContext roomDB = new RoomDBContext();
+        ArrayList<Room> rooms = roomDB.getRoombyDomID(id);
+        ArrayList<Dom> doms = domDB.getDoms();
+        request.setAttribute("did", id);
+        request.setAttribute("doms", doms);
+        request.setAttribute("rooms", rooms);
+        request.getRequestDispatcher("view/DomDetail.jsp").forward(request, response);
     }
 
     /**
@@ -60,19 +71,12 @@ public class CreateRequestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account acc = (Account) request.getSession().getAttribute("acc");
-        String title = request.getParameter("title");
-        String note = request.getParameter("note");
-        Request rs = new Request();
-        rs.setNote(note);
-        rs.setTitle(title);
-        rs.setStatus(0);
-        StudentDBContext stuDB = new StudentDBContext();
-        Student student = stuDB.getStudentbyUsername(acc.getUsername());
-        rs.setStudent(student);
-        RequestDBContext rDB = new RequestDBContext();
-        rDB.insert(rs);
-        response.sendRedirect("studentrequest");
+        Gson gson = new Gson();
+        Integer id = (request.getParameter("did") == null) ? 1 : Integer.parseInt(request.getParameter("did"));
+        RoomDBContext roomDB = new RoomDBContext();
+        ArrayList<Room> rooms = roomDB.getRoombyDomID(id);
+        String roomtoGsonObject = toGsonObject("rooms", gson.toJson(rooms));
+        response.getWriter().print(roomtoGsonObject);
     }
 
     /**

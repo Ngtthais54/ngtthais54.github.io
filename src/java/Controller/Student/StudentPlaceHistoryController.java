@@ -3,20 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
-import Controller.authentication.BaseRequireAuthenController;
-import Dal.AccountDBContext;
 import Dal.StudentDBContext;
+import Dal.StudentDetailDBContext;
 import Model.Account;
-import Model.Room;
+import Model.Detail;
 import Model.Student;
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class UpdateController extends BaseRequireAuthenController{
+public class StudentPlaceHistoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +33,16 @@ public class UpdateController extends BaseRequireAuthenController{
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Account acc = (Account) request.getSession().getAttribute("acc");
+        StudentDBContext stuDB = new StudentDBContext();
+        Student student = stuDB.getStudentbyUsername(acc.getUsername());
+        StudentDetailDBContext sdDB = new StudentDetailDBContext();
+        ArrayList<Detail> details = sdDB.getDetailsbyStuID(student);
+        request.setAttribute("details", details);
+        request.getRequestDispatcher("view/PlaceHistory.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,13 +54,9 @@ public class UpdateController extends BaseRequireAuthenController{
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        StudentDBContext stuDB = new StudentDBContext();
-        Student student = stuDB.getStudentbyUsername(username);
-        request.setAttribute("student", student);
-        request.getRequestDispatcher("view/Update.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -66,30 +68,9 @@ public class UpdateController extends BaseRequireAuthenController{
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        boolean gender = request.getParameter("gender").equals("male");
-        Date dob = Date.valueOf(request.getParameter("dob"));
-        String address = request.getParameter("address");
-        Account sessionAcc = (Account) request.getSession().getAttribute("acc");
-        String username = sessionAcc.getUsername();
-        String password = request.getParameter("password");
-        Student student = new Student();
-        student.setName(name);
-        student.setGender(gender);
-        student.setDob(dob);
-        student.setAddress(address);
-        student.setUsername(username);
-        Account account = new Account();
-        account.setUsername(username);
-        account.setPassword(password);
-        account.setRole(2);
-        StudentDBContext stuDB = new StudentDBContext();
-        stuDB.updateStudent(student);
-        AccountDBContext accDB = new AccountDBContext();
-        accDB.updateAccount(account);
-        response.sendRedirect("home");
+        processRequest(request, response);
     }
 
     /**

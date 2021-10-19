@@ -38,6 +38,9 @@
                 left: 50px;
                 color: black; 
             }
+            select{
+                color: black;
+            }
         </style>
         <script>
            $(() => {
@@ -64,10 +67,10 @@
     </head>
     <body>
         <div class="container">
-            <img src="../img/img2.jpg" style="width:100%;height: 700px"/>
+            <img src="/AssignmentPRJ/img/img2.jpg" style="width:100%;height: 700px"/>
             <div class="centered">   
                 <h2>Login to your account</h2>
-                <form id="myform" action="../login" method="POST">
+                <form id="myform" action="login" method="POST">
                     <div class="form-group">
                         <label for="urs"></label>
                         <input type="text" class="form-control" id="urs" name="username" placeholder="Your Username">
@@ -78,9 +81,14 @@
                     </div>
                     <input type="checkbox" id="remember" name="remember" value="1">
                     <label for="remember">Remember me</label><br>
+                    <select name="gid">
+                        <option value="-1" selected="selected">Select Role</option>
+                        <c:forEach items="${requestScope.groups}" var="group"> 
+                            <option value="${group.gid}">${group.gname}</option>
+                        </c:forEach>
+                    </select><br>
                     <div style="display:none; color: red" class="errorMessage my-3"></div>
                     <input type="submit" value="LOGIN" style="color: black"><br>
-
                 </form><br>
                 <h4 style="color:black">To register new account --> <a href="Register.jsp" style="color: black">New User</a></h4>
             </div>

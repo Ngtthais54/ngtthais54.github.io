@@ -5,11 +5,14 @@
  */
 package Controller.authentication;
 
-import Controller.authentication.BaseRequireAuthenController;
 import Dal.AccountDBContext;
+import Dal.GroupDBContext;
 import Model.Account;
+import Model.Feature;
+import Model.Group;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -45,27 +48,49 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        GroupDBContext groupDB = new GroupDBContext();
+        
+        ArrayList<Group> groups = groupDB.getGroups();
         Cookie[] cookies = request.getCookies();
         AccountDBContext accDB = new AccountDBContext();
+        Account acc = null;
         if (cookies != null) {
             for (Cookie c : cookies) {
+                System.out.println(c.getName());
                 if (c.getName().equals("username")) {
-                    Account acc = accDB.getAccsByUsername(c.getValue());
+                    acc = accDB.getAccsByUsername(c.getValue());
+                    ArrayList<Group> userGroup = accDB.getGroupbyUsername(acc.getUsername());
+                    acc.setGroups(userGroup);
                     request.getSession().setAttribute("acc", acc);
-                    break;
+                }
+                if (c.getName().equals("groupnumber")) {
+                    acc.setGroupnumber(Integer.parseInt(c.getValue()));
                 }
             }
         }
+        request.setAttribute("groups", groups);
         HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
+        acc = (Account) session.getAttribute("acc");
         if (acc != null) {
-            if (acc.getRole() == 2) {
-                response.sendRedirect("home");
-            } else {
-                response.sendRedirect("adminhome");
+            ArrayList<Feature> Userfeature = groupDB.getFeaturesbyUsername(acc.getUsername());
+            acc.setFeatures(Userfeature);
+            for (Group group : acc.getGroups()) {
+
+                if (acc.getGroupnumber() == group.getGid()) {
+                    if (acc.getGroupnumber() == 2) {
+                        request.getRequestDispatcher("home").forward(request, response);
+
+                    }
+                    if (acc.getGroupnumber() == 1) {
+                        request.getRequestDispatcher("adminhome").forward(request, response);
+                    }
+                    return;
+                }
             }
+            request.getRequestDispatcher("view/Login.jsp").forward(request, response);
         } else {
-            response.sendRedirect("view/Login.jsp");
+
+            request.getRequestDispatcher("view/Login.jsp").forward(request, response);
         }
     }
 
@@ -83,28 +108,38 @@ public class LoginController extends HttpServlet {
         String remember = request.getParameter("remember");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        int gid = Integer.parseInt(request.getParameter("gid"));
         HttpSession session = request.getSession();
         AccountDBContext accDB = new AccountDBContext();
+
+        ArrayList<Group> Usergroup = accDB.getGroupbyUsername(username);
         Account acc = accDB.getAccsByUsername(username);
+        GroupDBContext groupDB = new GroupDBContext();
+//        for (Feature feature : Userfeature) {
+//            System.out.println(feature.getUrl());
+//        }
         if (remember != null) {
             Cookie cookie = new Cookie("username", username);
+            Cookie cookie1 = new Cookie("groupnumber", gid + "");
             cookie.setMaxAge(3600 * 24 * 7);
+            cookie1.setMaxAge(3600 * 24 * 7);
             response.addCookie(cookie);
+            response.addCookie(cookie1);
         }
         if (acc == null) {
             response.sendRedirect("view/Login.jsp");
+            return;
         } else {
+            acc.setGroupnumber(gid);
+            acc.setGroups(Usergroup);
             if (!password.equals(acc.getPassword())) {
                 response.sendRedirect("view/Login.jsp");
+                return;
             } else {
                 session.setAttribute("acc", acc);
-                if (acc.getRole() == 2) {
-                    response.sendRedirect("home");
-                } else {
-                    response.sendRedirect("adminhome");
-                }
             }
         }
+        doGet(request, response);
     }
 
     /**

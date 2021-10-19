@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
-import Controller.authentication.BaseRequireAuthenController;
+import Dal.StudentDBContext;
+import Model.Account;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class LogoutController extends BaseRequireAuthenController {
+public class MoneyController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +31,6 @@ public class LogoutController extends BaseRequireAuthenController {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getSession().removeAttribute("acc");
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cooky : cookies) {
-            if(cooky.getName().equals("username")){
-                cooky.setMaxAge(0);
-                response.addCookie(cooky);
-                break;
-            }
-        }
-        response.sendRedirect("view/Login.jsp");
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -53,9 +42,9 @@ public class LogoutController extends BaseRequireAuthenController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("view/Studentmoney.jsp").forward(request, response);
     }
 
     /**
@@ -67,9 +56,16 @@ public class LogoutController extends BaseRequireAuthenController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String value = request.getParameter("money");
+        BigDecimal money = BigDecimal.valueOf(Double.valueOf(value));
+        Account account = (Account) request.getSession().getAttribute("acc");
+        StudentDBContext stuDB = new StudentDBContext();
+        Student student = stuDB.getStudentbyUsername(account.getUsername());
+        student.setMoney(money);
+        stuDB.updateStudentMoney(student);
+        response.sendRedirect("home");
     }
 
     /**

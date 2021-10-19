@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.BedDBContext;
 import Dal.BookBedRequestDBContext;
 import Dal.DomDBContext;
@@ -33,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class BookBedController extends HttpServlet {
+public class BookBedController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,7 +55,7 @@ public class BookBedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Account acc = (Account) request.getSession().getAttribute("acc");
         StudentDBContext stuDB = new StudentDBContext();
@@ -85,7 +86,7 @@ public class BookBedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Account acc = (Account) request.getSession().getAttribute("acc");
         StudentDBContext stuDB = new StudentDBContext();

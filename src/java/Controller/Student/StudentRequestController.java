@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.Student;
 
+import Dal.RequestDBContext;
 import Dal.StudentDBContext;
 import Model.Account;
+import Model.Request;
 import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class MoneyController extends HttpServlet {
+public class StudentRequestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,6 +33,7 @@ public class MoneyController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -44,7 +47,13 @@ public class MoneyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/Studentmoney.jsp").forward(request, response);
+        Account acc = (Account) request.getSession().getAttribute("acc");
+        StudentDBContext stuDB = new StudentDBContext();
+        Student student = stuDB.getStudentbyUsername(acc.getUsername());
+        RequestDBContext rDB = new RequestDBContext();
+        ArrayList<Request> requests = rDB.getRequestbyStudentID(student.getId());
+        request.setAttribute("requests", requests);
+        request.getRequestDispatcher("/view/StudentRequest.jsp").forward(request, response);
     }
 
     /**
@@ -58,14 +67,7 @@ public class MoneyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String value = request.getParameter("money");
-        BigDecimal money = BigDecimal.valueOf(Double.valueOf(value));
-        Account account = (Account) request.getSession().getAttribute("acc");
-        StudentDBContext stuDB = new StudentDBContext();
-        Student student = stuDB.getStudentbyUsername(account.getUsername());
-        student.setMoney(money);
-        stuDB.updateStudentMoney(student);
-        response.sendRedirect("home");
+        
     }
 
     /**

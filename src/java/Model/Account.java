@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Admin
@@ -12,15 +14,40 @@ package Model;
 public class Account {
     private String username;
     private String password;
-    private int role;
+    private int groupnumber;
+    private ArrayList<Feature> features = new ArrayList<>();
+    private ArrayList<Group> groups = new ArrayList<>();
+
+    public ArrayList<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(ArrayList<Feature> features) {
+        this.features = features;
+    }
+
+    public int getGroupnumber() {
+        return groupnumber;
+    }
+
+    public void setGroupnumber(int groupnumber) {
+        this.groupnumber = groupnumber;
+    }
+
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
 
     public Account() {
     }
 
-    public Account(String username, String password, int role) {
+    public Account(String username, String password, int groupnumber) {
         this.username = username;
         this.password = password;
-        this.role = role;
     }
 
     public String getUsername() {
@@ -39,12 +66,5 @@ public class Account {
         this.password = password;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
     
 }

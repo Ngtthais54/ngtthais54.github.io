@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.authentication;
 
-import Dal.StudentDBContext;
-import Dal.StudentDetailDBContext;
-import Model.Account;
-import Model.Detail;
-import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class StudentPlaceHistoryController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +30,19 @@ public class StudentPlaceHistoryController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account acc = (Account) request.getSession().getAttribute("acc");
-        StudentDBContext stuDB = new StudentDBContext();
-        Student student = stuDB.getStudentbyUsername(acc.getUsername());
-        StudentDetailDBContext sdDB = new StudentDetailDBContext();
-        ArrayList<Detail> details = sdDB.getDetailsbyStuID(student);
-        request.setAttribute("details", details);
-        request.getRequestDispatcher("view/PlaceHistory.jsp").forward(request, response);
+        request.getSession().removeAttribute("acc");
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cooky : cookies) {
+            if(cooky.getName().equals("username")){
+                cooky.setMaxAge(0);
+                response.addCookie(cooky);
+            }
+            if(cooky.getName().equals("groupnumber")){
+                cooky.setMaxAge(0);
+                response.addCookie(cooky);
+            }
+        }
+        response.sendRedirect("login");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
