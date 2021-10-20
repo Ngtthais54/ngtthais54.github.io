@@ -76,6 +76,18 @@ public class StudentDBContext extends DBContext {
 
     public void addStudent(Student student) {
         try {
+            
+            connection.setAutoCommit(false);
+            String sql1 = "INSERT INTO [GroupAccount]\n"
+                    + "           ([gid]\n"
+                    + "           ,[username])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?)";
+            PreparedStatement stm1 = connection.prepareStatement(sql1);
+            stm1.setInt(1, 2);
+            stm1.setString(2, student.getUsername());
+            stm1.executeUpdate();
             String sql = "INSERT INTO [Student]\n"
                     + "           ([StudentID]\n"
                     + "           ,[StudentName]\n"
@@ -104,8 +116,21 @@ public class StudentDBContext extends DBContext {
             stm.setBigDecimal(7, student.getMoney());
             stm.setString(8, student.getUsername());
             stm.executeUpdate();
+           
+            connection.commit();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -142,6 +167,6 @@ public class StudentDBContext extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

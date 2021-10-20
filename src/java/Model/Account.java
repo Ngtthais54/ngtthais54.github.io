@@ -48,6 +48,7 @@ public class Account {
     public Account(String username, String password, int groupnumber) {
         this.username = username;
         this.password = password;
+        this.groupnumber = groupnumber;
     }
 
     public String getUsername() {

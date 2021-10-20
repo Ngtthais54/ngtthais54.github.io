@@ -61,6 +61,7 @@ public class BookBedRequestDBContext extends DBContext {
 
     public void insert(BookBed bookbed) {
         try {
+            connection.setAutoCommit(false);
             String sql = "INSERT INTO[BookBedRequest]\n"
                     + "           ([StudentId]\n"
                     + "           ,[Roomcode]\n"
@@ -86,9 +87,28 @@ public class BookBedRequestDBContext extends DBContext {
             stm.setInt(6, bookbed.getStatus());
             stm.setInt(7, bookbed.getSemester().getId());
             stm.executeUpdate();
+            String update_sql = "UPDATE [Bed]\n"
+                    + "   SET [Status] = ?\n"
+                    + " WHERE RoomCode = ? and BedNumber = ?";
+            PreparedStatement update_stm = connection.prepareStatement(update_sql);
+            update_stm.setString(1, "Booked");
+            update_stm.setString(2, bookbed.getRoom().getRoom_code());
+            update_stm.setInt(3, bookbed.getBed().getNumber());
+            update_stm.executeUpdate();
+            connection.commit();
         } catch (SQLException ex) {
-            Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
     }
 }

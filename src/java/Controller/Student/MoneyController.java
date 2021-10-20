@@ -63,7 +63,7 @@ public class MoneyController extends HttpServlet {
         Account account = (Account) request.getSession().getAttribute("acc");
         StudentDBContext stuDB = new StudentDBContext();
         Student student = stuDB.getStudentbyUsername(account.getUsername());
-        student.setMoney(money);
+        student.setMoney(student.getMoney().add(money));
         stuDB.updateStudentMoney(student);
         response.sendRedirect("home");
     }

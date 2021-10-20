@@ -119,7 +119,7 @@
     </head>
     <body onload="loadData()">
         <div class="container">
-            <form action="../register" method="POST">
+            <form action="register" method="POST">
                 ID: <input type="text" id="code" class="form-control" name="id" onkeyup="displayMessStudent(this.value)"><p id="idexist">ID exist</p>
                 Name: <input type="text" class="form-control" name="name"  id="name">
                 Gender: <input type="radio"  name="gender" value="male" checked="checked">Male <input type="radio" name="gender" value="female">Female <br>

@@ -11,11 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <script>
-        function Add(username){
-            window.location.href = "admin?username=" + username;
-        }
-    </script>
+        <script>
+            function Add(username) {
+                window.location.href = "admin?username=" + username;
+            }
+        </script>
     </head>
     <body>
         <table border="1px">
@@ -31,8 +31,22 @@
                     <td>${s.name}</td>
                     <td>${s.username}</td>
                     <td>
-                        <input type="button" onclick="Add(this.value);" value="${s.username}">
+                        Add <input type="button" onclick="Add(this.value);" value="${s.username}">
                     </td>
+                </tr>
+            </c:forEach>
+        </table>
+        <table border="1px">
+            <tr>
+                <td>AdminID</td>
+                <td>AdminName</td>
+                <td>Username</td>
+            </tr>
+            <c:forEach items="${requestScope.admins}" var="admin">
+                <tr>
+                    <td>${admin.id}</td>
+                    <td>${admin.name}</td>
+                    <td>${admin.username}</td>
                 </tr>
             </c:forEach>
         </table>

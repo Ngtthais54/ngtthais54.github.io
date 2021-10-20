@@ -5,7 +5,10 @@
  */
 package Controller.login;
 
+import Dal.AccountDBContext;
 import Dal.AdminDBContext;
+import Dal.StudentDBContext;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,8 +34,10 @@ public class AdminController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
+        StudentDBContext stuDB = new StudentDBContext();
+        Student student = stuDB.getStudentbyUsername(username);
         AdminDBContext addminDB = new AdminDBContext();
-        addminDB.addAdminbyUsername(username);
+        addminDB.addStudentToAdmin(student);
         response.sendRedirect("addadmin");
     }
 

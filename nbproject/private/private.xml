@@ -4,16 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Student/Personal.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Model/Group.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Login.jsp</file>
             <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Student/BookBedController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/LoginController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/GroupDBContext.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Student/MoneyController.java</file>
             <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/BookBedRequestDBContext.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Model/Account.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/BaseRequireAuthenController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/LogoutController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/AccountDBContext.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Model/BookBed.java</file>
         </group>
     </open-files>
 </project-private>

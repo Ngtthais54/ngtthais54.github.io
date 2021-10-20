@@ -23,14 +23,14 @@ public class AccountDBContext extends DBContext {
     public ArrayList<Account> getAccs() {
         ArrayList<Account> accs = new ArrayList<>();
         try {
-            String sql = "select username, passwordfrom Account";
+            String sql = "select Username, Password from Account";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             Account acc;
             while (rs.next()) {
                 acc = new Account();
-                acc.setUsername(rs.getString("username"));
-                acc.setPassword(rs.getString("password"));
+                acc.setUsername(rs.getString("Username"));
+                acc.setPassword(rs.getString("Password"));
                 accs.add(acc);
             }
         } catch (SQLException ex) {
@@ -63,16 +63,13 @@ public class AccountDBContext extends DBContext {
         try {
             String sql = "INSERT INTO [Account]\n"
                     + "           ([Username]\n"
-                    + "           ,[Password]\n"
-                    + "           ,[Role])\n"
+                    + "           ,[Password])\n"
                     + "     VALUES\n"
                     + "           (?\n"
-                    + "           ,?\n"
                     + "           ,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, account.getUsername());
             stm.setString(2, account.getPassword());
-            stm.setInt(3, 2);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,14 +89,15 @@ public class AccountDBContext extends DBContext {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<Group> getGroupbyUsername(String username){
+
+    public ArrayList<Group> getGroupbyUsername(String username) {
         ArrayList<Group> groups = new ArrayList<>();
         try {
             String sql = "select * from GroupAccount where username = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Group group = new Group();
                 group.setGid(rs.getInt("gid"));
                 groups.add(group);

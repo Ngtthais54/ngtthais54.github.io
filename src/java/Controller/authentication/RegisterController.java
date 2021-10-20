@@ -7,6 +7,7 @@ package Controller.authentication;
 
 import Dal.AccountDBContext;
 import Dal.DomDBContext;
+import Dal.GroupDBContext;
 import Dal.RoomDBContext;
 import Dal.StudentDBContext;
 import Dal.StudentDetailDBContext;
@@ -14,6 +15,7 @@ import Model.Account;
 import Model.Bed;
 import Model.Detail;
 import Model.Dom;
+import Model.Group;
 import Model.Room;
 import Model.Semester;
 import Model.Student;
@@ -63,9 +65,8 @@ public class RegisterController extends HttpServlet {
         String AccToGson = gson.toJson(accs);
         String StuToGson = gson.toJson(students);
         String ArrToObject = "{\"accounts\" : " + AccToGson + ",\"students\" : " + StuToGson + "}"; 
-        System.out.println(ArrToObject);
         response.getWriter().print(ArrToObject);
-        System.out.println(AccToGson);
+        request.getRequestDispatcher("view/Register.jsp").forward(request, response);
     }
 
     /**
@@ -112,10 +113,15 @@ public class RegisterController extends HttpServlet {
         detail.setSemester(semester);
         detail.setDate_booked(date);
         detail.setDate_checkout(date);
+        System.out.println(student.getUsername());
         AccountDBContext accDB = new AccountDBContext();
         Account account = new Account(username, password, 2);
-         StudentDBContext studb = new StudentDBContext();
-         accDB.addAccount(account);
+        StudentDBContext studb = new StudentDBContext();
+        Group group = new Group(2, "Normal");
+        account.getGroups().add(group);
+        GroupDBContext groupDB = new GroupDBContext();
+        
+        accDB.addAccount(account);
         studb.addStudent(student);
         sdDB.addStudentDetail(detail);
         response.sendRedirect("login");

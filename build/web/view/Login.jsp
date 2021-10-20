@@ -90,7 +90,7 @@
                     <div style="display:none; color: red" class="errorMessage my-3"></div>
                     <input type="submit" value="LOGIN" style="color: black"><br>
                 </form><br>
-                <h4 style="color:black">To register new account --> <a href="Register.jsp" style="color: black">New User</a></h4>
+                <h4 style="color:black">To register new account --> <a href="register" style="color: black">New User</a></h4>
             </div>
             <footer>
                 <div class="bottom-left">

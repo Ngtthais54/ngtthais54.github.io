@@ -5,11 +5,13 @@
  */
 package Dal;
 
+import Model.Account;
 import Model.Admin;
 import Model.Student;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,6 +39,68 @@ public class AdminDBContext extends DBContext {
             Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void addStudentToAdmin(Student student) {
+        try {
+            connection.setAutoCommit(false);
+            String sql = "INSERT INTO [GroupAccount]\n"
+                    + "           ([gid]\n"
+                    + "           ,[username])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, 1);
+            stm.setString(2, student.getUsername());
+            stm.executeUpdate();
+            String sql1 = "INSERT INTO [Admin]\n"
+                    + "           ([AdminID]\n"
+                    + "           ,[AdminName]\n"
+                    + "           ,[Username])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm1 = connection.prepareStatement(sql1);
+            stm1.setString(1, student.getId());
+            stm1.setString(2, student.getName());
+            stm1.setString(3, student.getUsername());
+            stm1.executeUpdate();
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public ArrayList<Admin> getAdmins() {
+        ArrayList<Admin> admins = new ArrayList<>();
+        try {
+            String sql = "select * from Admin";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Admin admin = new Admin();
+                admin.setId(rs.getString("AdminID"));
+                admin.setName(rs.getString("AdminName"));
+                admin.setUsername(rs.getString("Username"));
+                admins.add(admin);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return admins;
     }
 
     public void addAdminbyUsername(String username) {
@@ -81,8 +145,7 @@ public class AdminDBContext extends DBContext {
             } catch (SQLException ex1) {
                 Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex1);
             }
-        }
-        finally{
+        } finally {
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException ex) {

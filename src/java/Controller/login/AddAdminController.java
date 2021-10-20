@@ -5,7 +5,9 @@
  */
 package Controller.login;
 
+import Dal.AdminDBContext;
 import Dal.StudentDBContext;
+import Model.Admin;
 import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,6 +47,9 @@ public class AddAdminController extends HttpServlet {
             throws ServletException, IOException {
         StudentDBContext stuDB = new StudentDBContext();
         ArrayList<Student> students = stuDB.getStudents();
+        AdminDBContext adminDB = new AdminDBContext();
+        ArrayList<Admin> admins = adminDB.getAdmins();
+        request.setAttribute("admins", admins);
         request.setAttribute("students", students);
         request.getRequestDispatcher("view/AddAdmin.jsp").forward(request, response);
     }

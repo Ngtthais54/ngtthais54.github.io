@@ -121,7 +121,7 @@
                 <li><a href="logout">Logout</a></li>
                 <li><a  href="">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    
-                <li><a class="active" href="home">Home</a></li>
+                <li><a class="active" href="adminhome">Home</a></li>
             </ul>
             <section class = "left">
                 <h2>FUNCTION</h2>
