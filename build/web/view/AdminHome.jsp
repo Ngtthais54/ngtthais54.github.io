@@ -129,7 +129,7 @@
                 <button><a href="addadmin">Add admin</a></button><br>
                 <button><a href="bookbed">Book a bed</a></button><br>
                 <button><a href="domdetail">Dom detail</a></button><br>
-                <button><a href="studentrequest">Request</a></button><br>
+                <button><a href="viewrequest">View Request Of Students</a></button><br>
 
             </section>
             <section class="right">

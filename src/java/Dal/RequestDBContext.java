@@ -41,27 +41,50 @@ public class RequestDBContext extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(RequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public ArrayList<Request> getRequestbyStudentID(String studentid){
-         ArrayList<Request> requests = new ArrayList<>();
+
+    public ArrayList<Request> getRequestbyStudentID(String studentid) {
+        ArrayList<Request> requests = new ArrayList<>();
         try {
             String sql = "select Id,StudentID,Note,Title,Status from Request where StudentID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, studentid);
-             ResultSet rs = stm.executeQuery();
-             while(rs.next()){
-                 Request request = new Request();
-                 request.setId(rs.getInt("Id"));
-                 Student student = new Student();
-                 student.setId(rs.getString("StudentID"));
-                 request.setStudent(student);
-                 request.setNote(rs.getString("Note"));
-                 request.setTitle(rs.getString("Title"));
-                 request.setStatus(rs.getInt("Status"));
-                 requests.add(request);
-             }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Request request = new Request();
+                request.setId(rs.getInt("Id"));
+                Student student = new Student();
+                student.setId(rs.getString("StudentID"));
+                request.setStudent(student);
+                request.setNote(rs.getString("Note"));
+                request.setTitle(rs.getString("Title"));
+                request.setStatus(rs.getInt("Status"));
+                requests.add(request);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return requests;
+    }
+
+    public ArrayList<Request> getRequests() {
+        ArrayList<Request> requests = new ArrayList<>();
+        try {
+            String sql = "select * from Request";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Request request = new Request();
+                request.setId(rs.getInt("Id"));
+                request.setNote(rs.getString("Note"));
+                request.setTitle(rs.getString("Title"));
+                request.setStatus(rs.getInt("Status"));
+                Student student = new Student();
+                student.setId(rs.getString("StudentID"));
+                request.setStudent(student);
+                requests.add(request);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }

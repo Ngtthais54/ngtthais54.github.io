@@ -153,4 +153,34 @@ public class AdminDBContext extends DBContext {
             }
         }
     }
+    
+    public void deleteAdminbyUsername(String username){
+        try {
+            connection.setAutoCommit(false);
+            String sql_admin = "delete from Admin where Username = ?";
+            PreparedStatement stm_admin = connection.prepareStatement(sql_admin);
+            stm_admin.setString(1, username);
+            stm_admin.executeUpdate();
+            String sql_groupAcc = "delete from GroupAccount where username = ? and gid = ?";
+            PreparedStatement stm_groupAcc = connection.prepareStatement(sql_groupAcc);
+            stm_groupAcc.setString(1, username);
+            stm_groupAcc.setInt(2, 1);
+            stm_groupAcc.executeUpdate();
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

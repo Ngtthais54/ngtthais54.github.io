@@ -1,18 +1,16 @@
 <%-- 
-    Document   : AdminHome
-    Created on : Oct 18, 2021, 10:48:32 AM
+    Document   : ViewRequest
+    Created on : Oct 21, 2021, 10:48:33 PM
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%@page import="Model.Account"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
+        <title>JSP Page</title>
         <style>
             header{
                 background-color: #99FFFF;
@@ -105,36 +103,54 @@
                 width: 50%;
                 margin-top: 10px;
             }
+            table{
+                width: 100%;
+                text-align: center;
+            }
         </style>
-        <script>
-           
-        </script>
     </head>
     <body>
         <header>
-            <h1>Welcome to DOM system</h1>
-            <h3>Admin</h3>
+            <h1>Student Requests</h1>
         </header>
         <div class="container">
             <ul>
                 <li><a>DOM INFORMATION</a></li>
                 <li><a href="logout">Logout</a></li>
-                <li><a  href="">Hello ${sessionScope.acc.username}</a>
+                <li><a  href="perinfo">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    
-                <li><a class="active" href="adminhome">Home</a></li>
+                <li><a class="active" href="home">Home</a></li>
             </ul>
-            <section class = "left">
-                <h2>FUNCTION</h2>
-
-                <button><a href="addadmin">Add admin</a></button><br>
-                <button><a href="bookbed">Book a bed</a></button><br>
-                <button><a href="domdetail">Dom detail</a></button><br>
-                <button><a href="viewrequest">View Request Of Students</a></button><br>
-
-            </section>
-            <section class="right">
-                
-            </section>
+            <form action="viewrequest" method="POST">
+                <table border="1px">
+                    <tr>
+                        <th>ID</th>
+                        <th>StudentID</th>
+                        <th>Title</th>
+                        <th>Note</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach items="${requestScope.requests}" var="r">
+                        <tr>
+                            <td>${r.id}</td>
+                            <td>${r.student.id}</td>
+                            <td>${r.title}</td>
+                            <td>${r.note}</td>
+                            <td>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" value="1" id="${r.id}" name="${r.id}" class="custom-control-input">
+                                    <label class="custom-control-label" for="${r.id}">Approve</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" value="-1" id="${r.id}" name="${r.id}"  checked="checked" class="custom-control-input">
+                                    <label class="custom-control-label" for="${r.id}">Reject</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+                <input type="submit" value="Submit">
+            </form>
         </div>
         <footer>
             <h3>Information Contact</h3>
