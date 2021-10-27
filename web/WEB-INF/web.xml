@@ -84,6 +84,10 @@
         <servlet-name>ViewRequestController</servlet-name>
         <servlet-class>Controller.login.ViewRequestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateRequestController</servlet-name>
+        <servlet-class>Controller.login.UpdateRequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -163,6 +167,10 @@
     <servlet-mapping>
         <servlet-name>ViewRequestController</servlet-name>
         <url-pattern>/viewrequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRequestController</servlet-name>
+        <url-pattern>/updaterequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
