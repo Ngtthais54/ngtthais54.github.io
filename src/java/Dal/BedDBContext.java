@@ -29,7 +29,7 @@ public class BedDBContext extends DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, roomcode);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Bed bed = new Bed();
                 bed.setNumber(rs.getInt("BedNumber"));
                 bed.setStatus(rs.getString("Status"));
@@ -40,15 +40,15 @@ public class BedDBContext extends DBContext {
         }
         return beds;
     }
-    
-    public Bed getBedbyRoomandNumber(String roomcode, int bednumber){
+
+    public Bed getBedbyRoomandNumber(String roomcode, int bednumber) {
         try {
             String sql = "select RoomCode,BedNumber,Price from Bed where RoomCode = ? and BedNumber = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, roomcode);
             stm.setInt(2, bednumber);
             ResultSet rs = stm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Bed bed = new Bed();
                 Room room = new Room();
                 room.setRoom_code(rs.getString("RoomCode"));
@@ -62,4 +62,21 @@ public class BedDBContext extends DBContext {
         }
         return null;
     }
+
+    public void updateStatus(Bed bed) {
+        try {
+            String sql = "UPDATE [Bed]\n"
+                    + "   SET [Status] = ?\n"
+                    + " WHERE RoomCode = ? and BedNumber = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, bed.getStatus());
+            stm.setString(2, bed.getRoom().getRoom_code());
+            stm.setInt(3, bed.getNumber());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BedDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 }

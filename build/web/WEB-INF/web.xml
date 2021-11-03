@@ -70,23 +70,31 @@
     </servlet>
     <servlet>
         <servlet-name>AddAdminController</servlet-name>
-        <servlet-class>Controller.login.AddAdminController</servlet-class>
+        <servlet-class>Controller.admin.AddAdminController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminController</servlet-name>
-        <servlet-class>Controller.login.AdminController</servlet-class>
+        <servlet-class>Controller.admin.AdminController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteAdminController</servlet-name>
-        <servlet-class>Controller.login.DeleteAdminController</servlet-class>
+        <servlet-class>Controller.admin.DeleteAdminController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewRequestController</servlet-name>
-        <servlet-class>Controller.login.ViewRequestController</servlet-class>
+        <servlet-class>Controller.admin.ViewRequestController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateRequestController</servlet-name>
-        <servlet-class>Controller.login.UpdateRequestController</servlet-class>
+        <servlet-class>Controller.admin.UpdateRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBookBedController</servlet-name>
+        <servlet-class>Controller.admin.ViewBookBedController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBookBedController</servlet-name>
+        <servlet-class>Controller.admin.UpdateBookBedController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -171,6 +179,14 @@
     <servlet-mapping>
         <servlet-name>UpdateRequestController</servlet-name>
         <url-pattern>/updaterequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBookBedController</servlet-name>
+        <url-pattern>/viewbookbed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBookBedController</servlet-name>
+        <url-pattern>/updatebookbed</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

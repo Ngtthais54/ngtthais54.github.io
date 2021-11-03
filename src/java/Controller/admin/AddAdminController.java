@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.admin;
 
-import Dal.RequestDBContext;
-import Model.Request;
+import Dal.AdminDBContext;
+import Dal.StudentDBContext;
+import Model.Admin;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class UpdateRequestController extends HttpServlet {
+public class AddAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,6 +45,13 @@ public class UpdateRequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        StudentDBContext stuDB = new StudentDBContext();
+        ArrayList<Student> students = stuDB.getStudents();
+        AdminDBContext adminDB = new AdminDBContext();
+        ArrayList<Admin> admins = adminDB.getAdmins();
+        request.setAttribute("admins", admins);
+        request.setAttribute("students", students);
+        request.getRequestDispatcher("view/AddAdmin.jsp").forward(request, response);
     }
 
     /**
@@ -56,19 +65,6 @@ public class UpdateRequestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String totalrequest = request.getParameter("totalrequest");
-        String[] requestid = totalrequest.split(",");
-        ArrayList<Request> requests = new ArrayList<>();
-        for (int i = 0; i < requestid.length; i++) {
-            Request r = new Request();
-            r.setId(Integer.parseInt(requestid[i]));
-            r.setStatus(Integer.parseInt(request.getParameter(requestid[i])));
-            System.out.println(r.getStatus());
-            requests.add(r);
-        }
-        RequestDBContext rDB = new RequestDBContext();
-        rDB.updateRequest(requests);
-        doGet(request, response);
     }
 
     /**

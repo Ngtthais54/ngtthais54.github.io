@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.admin;
 
 import Dal.AccountDBContext;
 import Dal.AdminDBContext;

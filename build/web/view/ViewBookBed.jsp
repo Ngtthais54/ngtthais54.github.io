@@ -1,11 +1,11 @@
 <%-- 
-    Document   : ViewRequest
-    Created on : Oct 21, 2021, 10:48:33 PM
+    Document   : ViewBookBed
+    Created on : Oct 28, 2021, 9:39:53 AM
     Author     : Admin
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -133,27 +133,27 @@
 
                 //container.innerHTML = pageindex + ' ' + gap + ' ' + totalpage
                 if (pageindex - gap > 1)
-                    container.innerHTML += '<a href="viewrequest?page=1&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">First</a>';
+                    container.innerHTML += '<a href="viewbookbed?page=1&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">First</a>';
 
                 for (var i = pageindex - gap; i < pageindex; i++) {
                     if (i > 0)
-                        container.innerHTML += '<a href="viewrequest?page=' + i + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">' + i + '</a>';
+                        container.innerHTML += '<a href="viewbookbed?page=' + i + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">' + i + '</a>';
                 }
                 if (totalpage != 0) {
                     container.innerHTML += '<span>' + pageindex + '</span>'
                 }
                 for (var i = pageindex + 1; i <= pageindex + gap; i++) {
                     if (i <= totalpage)
-                        container.innerHTML += '<a href="viewrequest?page=' + i + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">' + i + '</a>';
+                        container.innerHTML += '<a href="viewbookbed?page=' + i + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">' + i + '</a>';
                 }
                 if (pageindex + gap < totalpage)
-                    container.innerHTML += '<a href="viewrequest?page=' + totalpage + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">Last</a>';
+                    container.innerHTML += '<a href="viewbookbed?page=' + totalpage + '$totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">Last</a>';
             }
         </script>
     </head>
     <body>
         <header>
-            <h1>Student Requests</h1>
+            <h1>Book Bed Requests</h1>
         </header>
         <div class="container">
             <ul>
@@ -164,34 +164,49 @@
                 <li><a class="active" href="adminhome">Home</a></li>
             </ul>
 
-            <form action="viewrequest" method="POST">
+            <form action="viewbookbed" method="POST">
                 Search <input id="q" type="text" name="search" value="${requestScope.q}">
                 <input type="submit" value="Search">
             </form>
-            <form action="updaterequest" method="POST">
+            <form action="updatebookbed" method="POST">
                 <table class="tablerequest" border="1px">
                     <tr>
                         <th>StudentID</th>
-                        <th>Title</th>
-                        <th>Note</th>
+                        <th>RoomCode</th>
+                        <th>Booked Date</th>
+                        <th>Booked_Checkout</th>
+                        <th>Bednumber</th>
+                        <th>Semester</th>
                         <th>Status</th>
                     </tr>
                     <c:set var="rid" value=""></c:set>
                     <c:forEach items="${requestScope.requests}" var="r">
-                        <c:set var="rid" value="${rid.concat(r.id).concat(',')}"></c:set>
+                        <c:set var="rid" value="${rid.concat(r.student.id).concat(',').concat(r.semester.id).concat(',')}"></c:set>
                             <tr>
                                 <td>${r.student.id}</td>
-                            <td>${r.title}</td>
-                            <td>${r.note}</td>
+                            <td>${r.room.room_code}</td>
+                            <td>${r.booked_date}</td>
+                            <td>${r.date_checkout}</td>
+                            <td>${r.bed.number}</td>
+                            <td>${r.semester.id}</td>
                             <td>
-                                <div class="custom-control custom-radio">
-                                    <input ${r.status == 1 ? "checked='checked'" : "" } type="radio" value="1" id="${r.id}" name="${r.id}" class="custom-control-input">
-                                    <label class="custom-control-label" for="${r.id}">Approve</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input ${r.status == -1 ? "checked='checked'" : "" } type="radio" value="-1" id="${r.id}" name="${r.id}"  class="custom-control-input">
-                                    <label class="custom-control-label" for="${r.id}">Reject</label>
-                                </div>
+                                <c:if test="${r.status == 0}">
+                                    <div class="custom-control custom-radio">
+                                        <input ${r.status == 1 ? "checked='checked'" : "" } type="radio" value="1" id="${('').concat(r.student.id).concat('.').concat(r.semester.id)}" name="${('').concat(r.student.id).concat(',').concat(r.semester.id)}" class="custom-control-input">
+                                        <label class="custom-control-label" for="${('').concat(r.student.id).concat('.').concat(r.semester.id)}">Approve</label>
+                                    </div>
+            
+                                    <div class="custom-control custom-radio">
+                                        <input ${r.status == -1 ? "checked='checked'" : "" } type="radio" value="-1" id="${('').concat(r.student.id).concat('.').concat(r.semester.id)}" name="${('').concat(r.student.id).concat(',').concat(r.semester.id)}"  class="custom-control-input">
+                                        <label class="custom-control-label" for="${('').concat(r.student.id).concat('.').concat(r.semester.id)}">Reject</label>
+                                    </div>
+                                </c:if>
+                                    <c:if test="${r.status == 1}">
+                                        Approve
+                                    </c:if>
+                                        <c:if test="${r.status == -1}">
+                                        Reject
+                                    </c:if>
                             </td>
                         </tr>
                     </c:forEach>

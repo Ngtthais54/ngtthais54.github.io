@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.admin;
 
-import Dal.AdminDBContext;
+import Dal.RequestDBContext;
+import Model.Request;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class DeleteAdminController extends HttpServlet {
+public class UpdateRequestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,13 +30,6 @@ public class DeleteAdminController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
-        AdminDBContext adminDB = new AdminDBContext();
-        adminDB.deleteAdminbyUsername(username);
-        response.sendRedirect("addadmin");
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,7 +43,7 @@ public class DeleteAdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("viewrequest").forward(request, response);
     }
 
     /**
@@ -62,7 +57,18 @@ public class DeleteAdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String totalrequest = request.getParameter("totalrequest");
+        String[] requestid = totalrequest.split(",");
+        ArrayList<Request> requests = new ArrayList<>();
+        for (int i = 0; i < requestid.length; i++) {
+            Request r = new Request();
+            r.setId(Integer.parseInt(requestid[i]));
+            r.setStatus(Integer.parseInt(request.getParameter(requestid[i])));
+            requests.add(r);
+        }
+        RequestDBContext rDB = new RequestDBContext();
+        rDB.updateRequest(requests);
+        doGet(request, response);
     }
 
     /**

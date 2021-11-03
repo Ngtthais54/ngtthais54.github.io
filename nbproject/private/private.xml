@@ -3,19 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/AddAdmin.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/login/UpdateRequestController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/login/ViewRequestController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewRequest.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Login.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/login/DeleteAdminController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Home.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/LoginController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/AdminHome.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/StudentRequest.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Model/Request.java</file>
             <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/RequestDBContext.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/AdminDBContext.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/ViewRequestController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewRequest.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/BookBedRequestDBContext.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/UpdateBookBedController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewBookBed.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/UpdateRequestController.java</file>
         </group>
     </open-files>
 </project-private>

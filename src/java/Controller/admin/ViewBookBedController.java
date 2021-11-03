@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.login;
+package Controller.admin;
 
+import Dal.BookBedRequestDBContext;
 import Dal.RequestDBContext;
+import Model.BookBed;
 import Model.Request;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,10 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class ViewRequestController extends HttpServlet {
-
-    int requestperpage = 3;
-
+public class ViewBookBedController extends HttpServlet {
+ int requestperpage = 3;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +44,7 @@ public class ViewRequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDBContext requestDB = new RequestDBContext();
+        BookBedRequestDBContext bookbedDB = new BookBedRequestDBContext();
         String q = request.getParameter("search");
         String raw_page = request.getParameter("page");
         if (raw_page == null || raw_page.length() == 0) {
@@ -58,7 +58,7 @@ public class ViewRequestController extends HttpServlet {
             sumofpage = totalsearchrequest / requestperpage + remainpage;
             int offset = (pageid - 1) * requestperpage;
             int fetch = requestperpage;
-            ArrayList<Request> search = requestDB.search(q, offset, fetch);
+            ArrayList<BookBed> search = bookbedDB.search(q, offset, fetch);
             request.setAttribute("totalsearchrequest", totalsearchrequest);
             request.setAttribute("requests", search);
 
@@ -66,7 +66,7 @@ public class ViewRequestController extends HttpServlet {
         }
         request.setAttribute("pageid", pageid);
         request.setAttribute("totalpage", sumofpage);
-        request.getRequestDispatcher("view/ViewRequest.jsp").forward(request, response);
+        request.getRequestDispatcher("view/ViewBookBed.jsp").forward(request, response);
     }
 
     /**
@@ -82,19 +82,19 @@ public class ViewRequestController extends HttpServlet {
             throws ServletException, IOException {
         String q = request.getParameter("search");
         int pageid = 1;
-        RequestDBContext requestDB = new RequestDBContext();
-        int totalrequest = requestDB.totalSearch(q);
+        BookBedRequestDBContext bookbedDB = new BookBedRequestDBContext();
+        int totalrequest = bookbedDB.totalSearch(q);
         int remainpage = (totalrequest % requestperpage > 0) ? 1 : 0;
         int sumofpage = totalrequest / requestperpage + remainpage;
         int offset = (pageid - 1) * requestperpage;
         int fetch = requestperpage;
-        ArrayList<Request> search = requestDB.search(q, offset, fetch);
+        ArrayList<BookBed> search = bookbedDB.search(q, offset, fetch);
         request.setAttribute("totalsearchrequest", totalrequest);
         request.setAttribute("requests", search);
         request.setAttribute("pageid", pageid);
         request.setAttribute("totalpage", sumofpage);
         request.setAttribute("q", q);
-        request.getRequestDispatcher("view/ViewRequest.jsp").forward(request, response);
+        request.getRequestDispatcher("view/ViewBookBed.jsp").forward(request, response);
     }
 
     /**

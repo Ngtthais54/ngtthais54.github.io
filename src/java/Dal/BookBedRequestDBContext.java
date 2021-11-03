@@ -7,6 +7,7 @@ package Dal;
 
 import Model.Bed;
 import Model.BookBed;
+import Model.Request;
 import Model.Room;
 import Model.Semester;
 import Model.Student;
@@ -58,6 +59,29 @@ public class BookBedRequestDBContext extends DBContext {
         }
         return bookbeds;
     }
+    
+    public BookBed getBookBedbyStudentandSemester(Student student, Semester semester){
+        try {
+            String sql = "select * from BookBedRequest where StudentId = ? and SemesterId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, student.getId());
+            stm.setInt(2, semester.getId());
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                BookBed bookbed = new BookBed();
+                Bed bed = new Bed();
+                Room room = new Room();
+                bed.setNumber(rs.getInt("Bednumber"));
+                room.setRoom_code(rs.getString("Roomcode"));
+                bookbed.setRoom(room);
+                bookbed.setBed(bed);
+                return bookbed;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public void insert(BookBed bookbed) {
         try {
@@ -104,6 +128,89 @@ public class BookBedRequestDBContext extends DBContext {
                 Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex1);
             }
         } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public ArrayList<BookBed> search(String q, int offset, int fetch) {
+        ArrayList<BookBed> bookbedrequests = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM BookBedRequest inner join Student \n"
+                    + "on BookBedRequest.StudentId = Student.StudentID\n"
+                    + "where Student.StudentID like ? ORDER BY Student.StudentID\n"
+                    + "OFFSET ? rows FETCH next ? rows only";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + q + "%");
+            stm.setInt(2, offset);
+            stm.setInt(3, fetch);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                BookBed bookbed = new BookBed();
+                Student student = new Student();
+                Room room = new Room();
+                Bed bed = new Bed();
+                Semester semester = new Semester();
+                student.setId(rs.getString("StudentId"));
+                room.setRoom_code(rs.getString("Roomcode"));
+                bed.setNumber(rs.getInt("Bednumber"));
+                semester.setId(rs.getInt("SemesterId"));
+                bookbed.setStudent(student);
+                bookbed.setRoom(room);
+                bookbed.setBed(bed);
+                bookbed.setSemester(semester);
+                bookbed.setBooked_date(rs.getDate("Booked_Date"));
+                bookbed.setDate_checkout(rs.getDate("Booked_Checkout"));
+                bookbed.setStatus(rs.getInt("Status"));
+                bookbedrequests.add(bookbed);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bookbedrequests;
+    }
+
+    public int totalSearch(String q) {
+        try {
+            String sql = "SELECT COUNT(*) as Total FROM BookBedRequest INNER JOIN Student ON BookBedRequest.StudentId = Student.StudentID"
+                    + " WHERE Student.StudentID like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + q + "%");
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public void updateBookBed(ArrayList<BookBed> bookbeds) {
+        try {
+            connection.setAutoCommit(false);
+            String sql = "UPDATE [BookBedRequest]\n"
+                    + "   SET [Status] = ?\n"
+                    + " WHERE StudentId = ? and SemesterId = ?";
+            for (BookBed bookbed : bookbeds) {
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setInt(1, bookbed.getStatus());
+                stm.setString(2, bookbed.getStudent().getId());
+                stm.setInt(3, bookbed.getSemester().getId());
+                stm.executeUpdate();
+            }
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(BookBedRequestDBContext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally{
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException ex) {

@@ -137,7 +137,7 @@
 
                 for (var i = pageindex - gap; i < pageindex; i++) {
                     if (i > 0)
-                        container.innerHTML += '<a href="viewrequest?page=' + i + '&totalsearchrequest="' + totalsearchrequest + '&search=' + q + '>' + i + '</a>';
+                        container.innerHTML += '<a href="viewrequest?page=' + i + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">' + i + '</a>';
                 }
                 if (totalpage != 0) {
                     container.innerHTML += '<span>' + pageindex + '</span>'
@@ -147,7 +147,7 @@
                         container.innerHTML += '<a href="viewrequest?page=' + i + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">' + i + '</a>';
                 }
                 if (pageindex + gap < totalpage)
-                    container.innerHTML += '<a href="viewrequest?page=' + totalpage + '$totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">Last</a>';
+                    container.innerHTML += '<a href="viewrequest?page=' + totalpage + '&totalsearchrequest=' + totalsearchrequest + '&search=' + q + '">Last</a>';
             }
         </script>
     </head>
@@ -163,7 +163,7 @@
                 <li><a href="about">About</a></li>    
                 <li><a class="active" href="adminhome">Home</a></li>
             </ul>
-            
+
             <form action="viewrequest" method="POST">
                 Search <input id="q" type="text" name="search" value="${requestScope.q}">
                 <input type="submit" value="Search">
