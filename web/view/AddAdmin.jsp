@@ -20,7 +20,7 @@
             }
             .left{
                 float: left;
-                background-color: #E0FFFF;
+                background-color: white;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 border: 1px solid black;
@@ -30,6 +30,10 @@
                 height: 400px;
                 text-align: center;
                 font-size: 19px;
+            }
+            .left h1{
+                margin-left: 100px;
+                margin-right: auto;
             }
             .left table{
                 width: 700px;
@@ -44,7 +48,7 @@
             .right{
                 float: right;
                 width: 44%;
-                background-color: #E0FFFF;
+                background-color: white;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 height: 400px;
@@ -98,6 +102,13 @@
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
             }
+            .left table{
+                margin-left: 20px;
+            }
+            .right table{
+                width: 90%;
+                margin-left: 30px;
+            }
             th, td {
                 text-align: center;
                 border-top: 1px solid #dee2e6;
@@ -130,7 +141,7 @@
 
         <div class="container">
             <ul>
-                <li><a>DOM INFORMATION</a></li>
+                <li><a href="adminhome">DOM INFORMATION</a></li>
                 <li><a href="logout">Logout</a></li>
                 <li><a  href="perinfo">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    
@@ -138,7 +149,7 @@
             </ul>
             <section class = "left">
                 <h1>List of Students</h1>
-                <table border="1px">
+                <table class="table1" border="2px">
                     <tr>
                         <th>StudentID</th>
                         <th>StudentName</th>
@@ -159,12 +170,12 @@
             </section>
             <section class="right">
                 <h1>List of Admins</h1>
-                <table border="1px">
+                <table border="2px">
                     <tr>
-                        <td>AdminID</td>
-                        <td>AdminName</td>
-                        <td>Username</td>
-                        <td>Delete</td>
+                        <th>AdminID</th>
+                        <th>AdminName</th>
+                        <th>Username</th>
+                        <th>Delete</th>
                     </tr>
                     <c:forEach items="${requestScope.admins}" var="admin">
                         <tr>

@@ -57,15 +57,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccountDBContext accDB = new AccountDBContext();
-        StudentDBContext stuDB = new StudentDBContext();
-        ArrayList<Student> students = stuDB.getStudents();
-        ArrayList<Account> accs = accDB.getAccs();
-        Gson gson = new Gson();
-        String AccToGson = gson.toJson(accs);
-        String StuToGson = gson.toJson(students);
-        String ArrToObject = "{\"accounts\" : " + AccToGson + ",\"students\" : " + StuToGson + "}"; 
-        response.getWriter().print(ArrToObject);
+       
         request.getRequestDispatcher("view/Register.jsp").forward(request, response);
     }
 

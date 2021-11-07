@@ -58,12 +58,6 @@
                 background-color: #FF7F50;
             }
             .left{
-                background-color: #DDDDDD;
-                margin-top: 10px;
-                margin-bottom: 10px;
-                border: 1px solid black;
-                border-radius: 5px 5px 5px 5px;
-                
                 padding-right: 140px;
                 height: 400px;
                 text-align: center;
@@ -80,9 +74,27 @@
                 width: 500px;
                 height: 50px;
             }
+            .container {
+                position: relative;
+                color: white;
+
+            }
+            /* Centered text */
+            .centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+            img{
+                margin-left: auto;
+                margin-right: auto;
+
+            }
         </style>
         <script>
-           
+
         </script>
     </head>
     <body>
@@ -91,14 +103,17 @@
             <h3>Admin</h3>
         </header>
         <div class="container">
+
             <ul>
-                <li><a>DOM INFORMATION</a></li>
+                <li><a href="adminhome">DOM INFORMATION</a></li>
                 <li><a href="logout">Logout</a></li>
                 <li><a  href="">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    
                 <li><a class="active" href="adminhome">Home</a></li>
             </ul>
-            <section class = "left">
+            <img src="/AssignmentPRJ/img/A4-Twenty-19.jpg" style="width:100%;height: 400px"/>
+
+            <section class = "centered">
                 <h2>FUNCTION</h2>
 
                 <button><a href="addadmin">Add admin</a></button><br>
@@ -107,6 +122,7 @@
                 <button><a href="viewrequest">View Request Of Students</a></button><br>
 
             </section>
+
         </div>
         <footer>
             <h3>Information Contact</h3>

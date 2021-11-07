@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewRequest.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/About.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/AdminHome.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/AdminDomDetailController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Student/DomDetailController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/UpdateBookBedController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewBookBed.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/RegisterController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/CheckRegisController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/Home/AdminHome.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/authentication/BaseRequireAuthenController.java</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/Register.jsp</file>
+            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/BookBed.jsp</file>
+        </group>
     </open-files>
 </project-private>

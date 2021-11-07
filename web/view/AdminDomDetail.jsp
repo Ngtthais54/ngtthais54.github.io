@@ -121,7 +121,7 @@
                 <h1>DOM DETAIL</h1>
             </header>
             <ul>
-                <li><a>DOM INFORMATION</a></li>
+                <li><a href="adminhome">DOM INFORMATION</a></li>
                 <li><a href="logout">Logout</a></li>
                 <li><a  href="perinfo">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    

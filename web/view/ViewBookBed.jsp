@@ -160,7 +160,7 @@
         </header>
         <div class="container">
             <ul>
-                <li><a>DOM INFORMATION</a></li>
+                <li><a href="adminhome">DOM INFORMATION</a></li>
                 <li><a href="logout">Logout</a></li>
                 <li><a  href="perinfo">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    
@@ -184,7 +184,7 @@
                     </tr>
                     <c:set var="rid" value=""></c:set>
                     <c:forEach items="${requestScope.requests}" var="r">
-                        <c:set var="rid" value="${rid.concat(r.student.id).concat(',').concat(r.semester.id).concat(',')}"></c:set>
+                       
                             <tr>
                                 <td>${r.student.id}</td>
                             <td>${r.room.room_code}</td>
@@ -194,6 +194,7 @@
                             <td>${r.semester.id}</td>
                             <td>
                                 <c:if test="${r.status == 0}">
+                                     <c:set var="rid" value="${rid.concat(r.student.id).concat(',').concat(r.semester.id).concat(',')}"></c:set>
                                     <div class="custom-control custom-radio">
                                         <input ${r.status == 1 ? "checked='checked'" : "" } type="radio" value="1" id="${('').concat(r.student.id).concat('.').concat(r.semester.id)}" name="${('').concat(r.student.id).concat(',').concat(r.semester.id)}" class="custom-control-input">
                                         <label class="custom-control-label" for="${('').concat(r.student.id).concat('.').concat(r.semester.id)}">Approve</label>
