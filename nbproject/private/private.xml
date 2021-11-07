@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/RequestDBContext.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/ViewRequestController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewRequest.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Dal/BookBedRequestDBContext.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/UpdateBookBedController.java</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/web/view/ViewBookBed.jsp</file>
-            <file>file:/D:/PRJ301/AssignmentPRJ/src/java/Controller/admin/UpdateRequestController.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

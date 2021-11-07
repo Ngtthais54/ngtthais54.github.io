@@ -15,7 +15,7 @@
         <title>Home Page</title>
         <style>
             header{
-                background-color: #99FFFF;
+                background-color: #FF7F50;
                 display: block;
                 padding-bottom: 5px;
                 text-align: center;
@@ -55,31 +55,19 @@
             footer{
                 clear:both;
                 text-align: center;
-                background-color: #99FFFF;
+                background-color: #FF7F50;
             }
             .left{
-                float: left;
                 background-color: #DDDDDD;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 border: 1px solid black;
                 border-radius: 5px 5px 5px 5px;
-                width: 69%;
+                
                 padding-right: 140px;
                 height: 400px;
                 text-align: center;
                 font-size: 30px;
-            }
-            .right{
-                float: right;
-                width: 20%;
-                background-color: #DDDDDD;
-                margin-top: 10px;
-                margin-bottom: 10px;
-                height: 400px;
-                border: 1px solid black;
-                border-radius: 5px 5px 5px 5px;
-                text-align: center;
             }
             button{
                 width: 200px;
@@ -91,19 +79,6 @@
             button{
                 width: 500px;
                 height: 50px;
-            }
-            .right .money{
-                border: 1px solid black;
-                width: 70%;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 100px;
-                text-align: center;
-                padding-bottom: 10px;
-            }
-            .right button{
-                width: 50%;
-                margin-top: 10px;
             }
         </style>
         <script>
@@ -128,12 +103,9 @@
 
                 <button><a href="addadmin">Add admin</a></button><br>
                 <button><a href="viewbookbed">View Book Bed Request of Student</a></button><br>
-                <button><a href="domdetail">Dom detail</a></button><br>
+                <button><a href="admindomdetail">Dom detail</a></button><br>
                 <button><a href="viewrequest">View Request Of Students</a></button><br>
 
-            </section>
-            <section class="right">
-                
             </section>
         </div>
         <footer>

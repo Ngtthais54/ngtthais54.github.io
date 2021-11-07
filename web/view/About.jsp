@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <p>The system was developed by Nguyen The Thai. For any information, please send to gmail thaithenguyen2001@gmail.com or contact phone number 0964040501</p>
     </body>
 </html>

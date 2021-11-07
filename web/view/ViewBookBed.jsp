@@ -13,7 +13,7 @@
         <title>JSP Page</title>
         <style>
             header{
-                background-color: #99FFFF;
+                background-color: #FF7F50;
                 display: block;
                 padding-bottom: 5px;
                 text-align: center;
@@ -53,7 +53,7 @@
             footer{
                 clear:both;
                 text-align: center;
-                background-color: #99FFFF;
+                background-color: #FF7F50;
             }
             .left{
                 float: left;
@@ -125,6 +125,9 @@
             .tablerequest{
                 margin-bottom: 10px;
             }
+            form{
+                margin: 10px;
+            }
         </style>
         <script>
             function createPagger(div, pageindex, gap, totalpage, totalsearchrequest) {
@@ -165,7 +168,7 @@
             </ul>
 
             <form action="viewbookbed" method="POST">
-                Search <input id="q" type="text" name="search" value="${requestScope.q}">
+                StudentID <input id="q" type="text" name="search" value="${requestScope.q}">
                 <input type="submit" value="Search">
             </form>
             <form action="updatebookbed" method="POST">
@@ -175,7 +178,7 @@
                         <th>RoomCode</th>
                         <th>Booked Date</th>
                         <th>Booked_Checkout</th>
-                        <th>Bednumber</th>
+                        <th>Bednumber</th> 
                         <th>Semester</th>
                         <th>Status</th>
                     </tr>

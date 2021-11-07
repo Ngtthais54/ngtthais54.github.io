@@ -13,14 +13,14 @@
         <title>JSP Page</title>
         <style>
             header{
-                background-color: #99FFFF;
+                background-color: #FF7F50;
                 display: block;
                 padding-bottom: 5px;
                 text-align: center;
             }
             .left{
                 float: left;
-                background-color: #DDDDDD;
+                background-color: #E0FFFF;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 border: 1px solid black;
@@ -44,7 +44,7 @@
             .right{
                 float: right;
                 width: 44%;
-                background-color: #DDDDDD;
+                background-color: #E0FFFF;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 height: 400px;
@@ -84,7 +84,30 @@
             footer{
                 clear:both;
                 text-align: center;
-                background-color: #99FFFF;
+                background-color: #FF7F50;
+            }
+            .add{
+                border-color: #00FF7F;
+                background-color: #3CB371;
+            }
+            body{
+                background-color: #DDDDDD
+            }
+            table {
+                width: 100%;        
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+            }
+            th, td {
+                text-align: center;
+                border-top: 1px solid #dee2e6;
+            }
+            tbody tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+            .del{
+                border-color: #B22222;
+                background-color: #FF0000;
             }
         </style>
         <script>
@@ -117,10 +140,10 @@
                 <h1>List of Students</h1>
                 <table border="1px">
                     <tr>
-                        <td>StudentID</td>
-                        <td>StudentName</td>
-                        <td>Username</td>
-                        <td>Add</td>
+                        <th>StudentID</th>
+                        <th>StudentName</th>
+                        <th>Username</th>
+                        <th>Add</th>
                     </tr>
                     <c:forEach items="${requestScope.students}" var="s">
                         <tr>
@@ -128,7 +151,7 @@
                             <td>${s.name}</td>
                             <td>${s.username}</td>
                             <td>
-                                <input type="button" onclick="Add(this.value);" value="${s.username}">
+                                <input class="add" type="button" onclick="Add(this.value);" value="${s.username}">
                             </td>
                         </tr>
                     </c:forEach>
@@ -149,7 +172,7 @@
                             <td>${admin.name}</td>
                             <td>${admin.username}</td>
                             <td>
-                                <input type="button" onclick="Delete(this.value);" value="${admin.username}">
+                                <input class="del" type="button" onclick="Delete(this.value);" value="${admin.username}">
                             </td>
                         </tr>
                     </c:forEach>
