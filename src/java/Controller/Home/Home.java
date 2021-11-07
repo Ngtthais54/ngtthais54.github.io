@@ -5,6 +5,7 @@
  */
 package Controller.Home;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.StudentDBContext;
 import Model.Account;
 import Model.Student;
@@ -20,7 +21,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
  *
  * @author Admin
  */
-public class Home extends HttpServlet {
+public class Home extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,7 +52,7 @@ public class Home extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -65,7 +66,7 @@ public class Home extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

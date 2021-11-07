@@ -5,6 +5,7 @@
  */
 package Controller.Student;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.RequestDBContext;
 import Dal.StudentDBContext;
 import Model.Account;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class StudentRequestController extends HttpServlet {
+public class StudentRequestController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +46,7 @@ public class StudentRequestController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Account acc = (Account) request.getSession().getAttribute("acc");
         StudentDBContext stuDB = new StudentDBContext();
@@ -65,7 +66,7 @@ public class StudentRequestController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
     }

@@ -5,6 +5,7 @@
  */
 package Controller.admin;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.AdminDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class DeleteAdminController extends HttpServlet {
+public class DeleteAdminController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +47,7 @@ public class DeleteAdminController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -60,7 +61,7 @@ public class DeleteAdminController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

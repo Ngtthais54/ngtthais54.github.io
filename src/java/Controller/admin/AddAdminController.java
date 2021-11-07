@@ -5,6 +5,7 @@
  */
 package Controller.admin;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.AdminDBContext;
 import Dal.StudentDBContext;
 import Model.Admin;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class AddAdminController extends HttpServlet {
+public class AddAdminController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +44,7 @@ public class AddAdminController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         StudentDBContext stuDB = new StudentDBContext();
         ArrayList<Student> students = stuDB.getStudents();
@@ -63,7 +64,7 @@ public class AddAdminController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 

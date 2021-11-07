@@ -5,6 +5,7 @@
  */
 package Controller.admin;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.BedDBContext;
 import Dal.BookBedRequestDBContext;
 import Dal.StudentDetailDBContext;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class UpdateBookBedController extends HttpServlet {
+public class UpdateBookBedController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +49,7 @@ public class UpdateBookBedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("viewbookbed").forward(request, response);
     }
@@ -62,7 +63,7 @@ public class UpdateBookBedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BookBedRequestDBContext bookbedDB = new BookBedRequestDBContext();
         BedDBContext bedDB = new BedDBContext();

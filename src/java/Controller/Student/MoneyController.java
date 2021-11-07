@@ -5,6 +5,7 @@
  */
 package Controller.Student;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.StudentDBContext;
 import Model.Account;
 import Model.Student;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class MoneyController extends HttpServlet {
+public class MoneyController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +43,7 @@ public class MoneyController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("view/Studentmoney.jsp").forward(request, response);
     }
@@ -56,7 +57,7 @@ public class MoneyController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String value = request.getParameter("money");
         BigDecimal money = BigDecimal.valueOf(Double.valueOf(value));

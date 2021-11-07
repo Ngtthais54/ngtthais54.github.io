@@ -5,6 +5,7 @@
  */
 package Controller.Student;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.DomDBContext;
 import Dal.RoomDBContext;
 import Model.Dom;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class DomDetailController extends HttpServlet {
+public class DomDetailController extends BaseRequireAuthenController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,7 +48,7 @@ public class DomDetailController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = (request.getParameter("did") == null) ? 1 : Integer.parseInt(request.getParameter("did"));
         DomDBContext domDB = new DomDBContext();
@@ -69,7 +70,7 @@ public class DomDetailController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Gson gson = new Gson();
         Integer id = (request.getParameter("did") == null) ? 1 : Integer.parseInt(request.getParameter("did"));

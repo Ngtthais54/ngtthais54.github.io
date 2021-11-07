@@ -43,6 +43,7 @@ public abstract class BaseRequireAuthenController extends HttpServlet {
                    isAuthorize = true;
                    break;
                }
+               
            }
        }
        return isAuthorize;

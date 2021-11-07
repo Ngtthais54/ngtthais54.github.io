@@ -5,6 +5,7 @@
  */
 package Controller.admin;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.BookBedRequestDBContext;
 import Dal.RequestDBContext;
 import Dal.SemesterDBContext;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class ViewBookBedController extends HttpServlet {
+public class ViewBookBedController extends BaseRequireAuthenController {
  int requestperpage = 3;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +45,7 @@ public class ViewBookBedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BookBedRequestDBContext bookbedDB = new BookBedRequestDBContext();
         String q = request.getParameter("search");
@@ -80,7 +81,7 @@ public class ViewBookBedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String q = request.getParameter("search");
         int pageid = 1;

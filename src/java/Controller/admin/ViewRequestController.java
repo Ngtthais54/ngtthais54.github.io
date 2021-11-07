@@ -5,6 +5,7 @@
  */
 package Controller.admin;
 
+import Controller.authentication.BaseRequireAuthenController;
 import Dal.RequestDBContext;
 import Model.Request;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class ViewRequestController extends HttpServlet {
+public class ViewRequestController extends BaseRequireAuthenController {
 
     int requestperpage = 3;
 
@@ -42,7 +43,7 @@ public class ViewRequestController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDBContext requestDB = new RequestDBContext();
         String q = request.getParameter("search");
@@ -79,7 +80,7 @@ public class ViewRequestController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String q = request.getParameter("search");
         int pageid = 1;
