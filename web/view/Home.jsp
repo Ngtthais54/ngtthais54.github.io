@@ -58,11 +58,13 @@
             }
             .left{
                 float: left;
-                background-color: #DDDDDD;
+
                 margin-top: 10px;
                 margin-bottom: 10px;
-                border: 1px solid black;
-                border-radius: 5px 5px 5px 5px;
+                position: absolute;
+                top: 8px;
+                left: 16px;
+
                 width: 69%;
                 padding-right: 140px;
                 height: 400px;
@@ -72,12 +74,14 @@
             .right{
                 float: right;
                 width: 20%;
-                background-color: #DDDDDD;
+
                 margin-top: 10px;
                 margin-bottom: 10px;
                 height: 400px;
-                border: 1px solid black;
-                border-radius: 5px 5px 5px 5px;
+                position: absolute;
+                top: 8px;
+                right: 16px;
+
                 text-align: center;
             }
             button{
@@ -93,6 +97,7 @@
             }
             .right .money{
                 border: 1px solid black;
+                background-color: black;
                 width: 70%;
                 margin-left: auto;
                 margin-right: auto;
@@ -104,9 +109,27 @@
                 width: 50%;
                 margin-top: 10px;
             }
+            .container {
+                position: relative;
+                color: white;
+
+            }
+            /* Centered text */
+            .centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+            }
+            img{
+                margin-left: auto;
+                margin-right: auto;
+
+            }
         </style>
         <script>
-            function myFunction(){
+            function myFunction() {
                 window.location.href = "money";
             }
         </script>
@@ -118,21 +141,22 @@
         </header>
         <div class="container">
             <ul>
-                <li><a>DOM INFORMATION</a></li>
+                <li><a href="home">DOM INFORMATION</a></li>
                 <li><a href="logout">Logout</a></li>
                 <li><a  href="perinfo">Hello ${sessionScope.acc.username}</a>
                 <li><a href="about">About</a></li>    
                 <li><a class="active" href="home">Home</a></li>
             </ul>
+            <img src="/AssignmentPRJ/img/ktx.jpg" style="width:100%;height: 400px"/>
             <section class = "left">
                 <h2>FUNCTION</h2>
-
                 <button><a href="placehistory">Place History</a></button><br>
                 <button><a href="bookbed">Book a bed</a></button><br>
                 <button><a href="domdetail">Dom detail</a></button><br>
                 <button><a href="studentrequest">Request</a></button><br>
-
             </section>
+
+
             <section class="right">
                 <div class="money">
                     <h2>Your Money</h2>

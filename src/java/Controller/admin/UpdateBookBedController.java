@@ -7,13 +7,16 @@ package Controller.admin;
 
 import Dal.BedDBContext;
 import Dal.BookBedRequestDBContext;
+import Dal.StudentDetailDBContext;
 import Model.Bed;
 import Model.BookBed;
+import Model.Detail;
 import Model.Request;
 import Model.Semester;
 import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,6 +69,7 @@ public class UpdateBookBedController extends HttpServlet {
         String totalrequest = request.getParameter("totalrequest");
         String[] requestid = totalrequest.split(",");
         ArrayList<BookBed> requests = new ArrayList<>();
+        Detail detail = new Detail();
         for (int i = 0; i < requestid.length; i++) {
             Student student = new Student();
             student.setId(requestid[i]);
@@ -82,8 +86,17 @@ public class UpdateBookBedController extends HttpServlet {
             }
             BookBed raw_bookbed = bookbedDB.getBookBedbyStudentandSemester(student, semester);
             Bed bed = bedDB.getBedbyRoomandNumber(raw_bookbed.getRoom().getRoom_code(), raw_bookbed.getBed().getNumber());
+            detail.setBed(raw_bookbed.getBed());
+            detail.setDate_booked(raw_bookbed.getBooked_date());
+            detail.setDate_checkout(raw_bookbed.getDate_checkout());
+            detail.setPrice(BigDecimal.valueOf(800));
+            detail.setRoom(raw_bookbed.getRoom());
+            detail.setSemester(raw_bookbed.getSemester());
+            detail.setStudent(raw_bookbed.getStudent());
+            StudentDetailDBContext seDB = new StudentDetailDBContext();
             if (bookbed.getStatus() == 1) {
                 bed.setStatus("Used");
+                seDB.addStudentDetail(detail);
             } else {
                 bed.setStatus("Empty");
             }

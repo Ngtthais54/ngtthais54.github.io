@@ -99,7 +99,6 @@ public class RegisterController extends HttpServlet {
         Date date = new Date(0);
         detail.setStudent(student);
         detail.setBed(bed);
-        detail.setDom(dom);
         detail.setPrice(bed.getPrice());
         detail.setRoom(room);
         detail.setSemester(semester);

@@ -29,7 +29,6 @@ public class StudentDetailDBContext extends DBContext {
             String sql = "INSERT INTO [Detail]\n"
                     + "           ([StudentID]\n"
                     + "           ,[RoomCode]\n"
-                    + "           ,[DomId]\n"
                     + "           ,[Date_Booked]\n"
                     + "           ,[Price]\n"
                     + "           ,[BedNumber]\n"
@@ -42,17 +41,15 @@ public class StudentDetailDBContext extends DBContext {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?\n"
                     + "           ,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, detail.getStudent().getId());
             stm.setString(2, detail.getRoom().getRoom_code());
-            stm.setInt(3, detail.getDom().getId());
-            stm.setDate(4, detail.getDate_booked());
-            stm.setBigDecimal(5, detail.getPrice());
-            stm.setInt(6, detail.getBed().getNumber());
-            stm.setInt(7, detail.getSemester().getId());
-            stm.setDate(8, detail.getDate_checkout());
+            stm.setDate(3, detail.getDate_booked());
+            stm.setBigDecimal(4, detail.getPrice());
+            stm.setInt(5, detail.getBed().getNumber());
+            stm.setInt(6, detail.getSemester().getId());
+            stm.setDate(7, detail.getDate_checkout());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDetailDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,10 +59,10 @@ public class StudentDetailDBContext extends DBContext {
     public ArrayList<Detail> getDetailsbyStuID(Student student) {
         ArrayList<Detail> details = new ArrayList<>();
         try {
-            String sql = "select Detail.Id as id, StudentID, RoomCode, Dom.Name as dname, Date_Booked,Price,BedNumber, Semester.NumberOfSemester as semester,\n"
+            String sql = "select Detail.Id as id, StudentID, RoomCode, Date_Booked,Price,BedNumber, Semester.NumberOfSemester as semester,\n"
                     + "Semester.Year as year, Date_Checkout\n"
-                    + "from Detail inner join Dom on Detail.DomId = Dom.Id\n"
-                    + "			inner join Semester on Detail.SemesterId = Semester.Id\n"
+                    + "from Detail \n"
+                    + "inner join Semester on Detail.SemesterId = Semester.Id\n"
                     + "where StudentID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, student.getId());
@@ -78,11 +75,9 @@ public class StudentDetailDBContext extends DBContext {
                 Semester semester = new Semester();
                 room.setRoom_code(rs.getString("RoomCode"));
                 student.setId(rs.getString("StudentID"));
-                dom.setName(rs.getString("dname"));
                 detail.setId(rs.getInt("id"));
                 detail.setStudent(student);
                 detail.setRoom(room);
-                detail.setDom(dom);
                 detail.setDate_booked(rs.getDate("Date_Booked"));
                 detail.setPrice(rs.getBigDecimal("Price"));
                 bed.setNumber(rs.getInt("BedNumber"));

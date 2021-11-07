@@ -21,7 +21,7 @@
                         {url: "/AssignmentPRJ/check",
                             type: 'GET',
                             success: function (response) {
-                                alert(response);
+                               // alert(response);
                                 var j = JSON.parse(response);
                                 for (let i = 0; i < j.accounts.length; i++) {
                                     accounts[i] = j.accounts[i];

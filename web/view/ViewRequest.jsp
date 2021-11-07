@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Student Requests</title>
         <style>
             header{
                 background-color: #FF7F50;
@@ -88,6 +88,9 @@
             .tablerequest{
                 margin-bottom: 10px;
             }
+            form{
+                margin: 10px;
+            }
         </style>
         <script>
             function createPagger(div, pageindex, gap, totalpage, totalsearchrequest) {
@@ -128,7 +131,7 @@
             </ul>
 
             <form action="viewrequest" method="POST">
-                Search <input id="q" type="text" name="search" value="${requestScope.q}">
+                StudentID <input id="q" type="text" name="search" value="${requestScope.q}">
                 <input type="submit" value="Search">
             </form>
             <form action="updaterequest" method="POST">

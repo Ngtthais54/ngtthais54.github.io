@@ -73,6 +73,11 @@ public class BookBedRequestDBContext extends DBContext {
                 Room room = new Room();
                 bed.setNumber(rs.getInt("Bednumber"));
                 room.setRoom_code(rs.getString("Roomcode"));
+                bookbed.setBooked_date(rs.getDate("Booked_Date"));
+                bookbed.setDate_checkout(rs.getDate("Booked_Checkout"));
+                bookbed.setSemester(semester);
+                bookbed.setStudent(student);
+                bookbed.setStatus(rs.getInt("Status"));
                 bookbed.setRoom(room);
                 bookbed.setBed(bed);
                 return bookbed;

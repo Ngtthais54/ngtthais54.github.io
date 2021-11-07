@@ -54,8 +54,6 @@ public class CheckRegisController extends HttpServlet {
         String AccToGson = gson.toJson(accs);
         String StuToGson = gson.toJson(students);
         String ArrToObject = "{\"accounts\" : " + AccToGson + ",\"students\" : " + StuToGson + "}"; 
-        System.out.println("Acc: " + AccToGson);
-        System.out.println("Stu: " + StuToGson);
         response.getWriter().print(ArrToObject);
     }
 

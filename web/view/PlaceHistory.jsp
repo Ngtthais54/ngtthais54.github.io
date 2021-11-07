@@ -18,24 +18,73 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            header{
+                background-color: #99FFFF;
+                display: block;
+                padding-bottom: 5px;
+                text-align: center;
+            }
+            h1{
+                padding-top: 50px;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover {
+                background-color: #111;
+            }
+            li{
+                float:right;
+            }
+            li:first-child{
+                float:left;
+            }
         </style>
     </head>
     <body>
-        <table border="1px">
-            <tr>
-                <td>Student ID</td>
-                <td>Room</td>
-                <td>Dom</td>
-                <td></td>
-            </tr>
-            <c:forEach items="${requestScope.details}" var="d">
+        <header>
+            <h1>Place History</h1>
+        </header>
+        <div class="container">
+            <ul>
+                <li><a href="home">DOM INFORMATION</a></li>
+                <li><a href="logout">Logout</a></li>
+                <li><a  href="perinfo">Hello ${sessionScope.acc.username}</a>
+                <li><a href="about">About</a></li>    
+                <li><a class="active" href="home">Home</a></li>
+            </ul>
+            <table border="1px">
                 <tr>
-                    <td>${d.student.name}</td>
-                    <td>${d.room.room_code}</td>
-                    <td>${d.dom.name}</td>
-                    <td><a href="historydetail?id=${d.id}">Detail</a></td>
+                    <td>Student ID</td>
+                    <td>Room</td>
+                    <td>Dom</td>
+                    
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${requestScope.details}" var="d">
+                    <tr>
+                        <td>${d.student.id}</td>
+                        <td>${d.room.room_code}</td>
+                        <td><a href="historydetail?id=${d.id}">Detail</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </body>
 </html>

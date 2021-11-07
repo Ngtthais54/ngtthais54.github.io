@@ -138,9 +138,9 @@
                 <table border="1px" id="roomtable">
                     <thead>
                         <tr>
-                            <td>Room Code</td>
-                            <td>Sum of bed</td>
-                            <td>Bed Detail</td>
+                            <th>Room Code</th>
+                            <th>Sum of bed</th>
+                            <th>Bed Detail</th>
                         </tr>
                     </thead>
                     <tbody>

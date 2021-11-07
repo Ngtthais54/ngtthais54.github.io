@@ -36,7 +36,6 @@ public class HistoryController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int detailid = Integer.parseInt(request.getParameter("id"));
-        System.out.println(detailid);
         Account acc = (Account) request.getSession().getAttribute("acc");
         StudentDBContext stuDB = new StudentDBContext();
         Student student = stuDB.getStudentbyUsername(acc.getUsername());

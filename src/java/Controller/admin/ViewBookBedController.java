@@ -7,8 +7,10 @@ package Controller.admin;
 
 import Dal.BookBedRequestDBContext;
 import Dal.RequestDBContext;
+import Dal.SemesterDBContext;
 import Model.BookBed;
 import Model.Request;
+import Model.Semester;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -89,6 +91,11 @@ public class ViewBookBedController extends HttpServlet {
         int offset = (pageid - 1) * requestperpage;
         int fetch = requestperpage;
         ArrayList<BookBed> search = bookbedDB.search(q, offset, fetch);
+        SemesterDBContext seDB = new SemesterDBContext();
+        for (BookBed bookBed : search) {
+            Semester semester = seDB.getbyID(bookBed.getSemester().getId());
+            bookBed.setSemester(semester);
+        }
         request.setAttribute("totalsearchrequest", totalrequest);
         request.setAttribute("requests", search);
         request.setAttribute("pageid", pageid);

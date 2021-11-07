@@ -16,7 +16,6 @@ public class Detail {
     private int id;
     private Student student;
     private Room room;
-    private Dom dom;
     private Date date_booked;
     private BigDecimal price;
     private Bed bed;
@@ -26,11 +25,11 @@ public class Detail {
     public Detail() {
     }
 
-    public Detail(int id,Student student, Room room, Dom dom, Date date_booked, BigDecimal price, Bed bed, Semester semester, Date date_checkout) {
+    public Detail(int id,Student student, Room room, Date date_booked, BigDecimal price, Bed bed, Semester semester, Date date_checkout) {
         this.id = id;
         this.student = student;
         this.room = room;
-        this.dom = dom;
+      
         this.date_booked = date_booked;
         this.price = price;
         this.bed = bed;
@@ -62,13 +61,6 @@ public class Detail {
         this.room = room;
     }
 
-    public Dom getDom() {
-        return dom;
-    }
-
-    public void setDom(Dom dom) {
-        this.dom = dom;
-    }
 
     public Date getDate_booked() {
         return date_booked;
@@ -109,7 +101,7 @@ public class Detail {
     public void setDate_checkout(Date date_checkout) {
         this.date_checkout = date_checkout;
     }
-    
+
     
     
 }

@@ -36,4 +36,23 @@ public class SemesterDBContext extends DBContext{
         }
         return semesters;
     }
+    
+    public Semester getbyID(int id){
+        try {
+            String sql = "select Id,NumberOfSemester,Year from Semester where Id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                Semester semester = new Semester();
+                semester.setId(rs.getInt("Id"));
+                semester.setNumbersemester(rs.getInt("NumberOfSemester"));
+                semester.setYear(rs.getInt("Year"));
+                return semester;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SemesterDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

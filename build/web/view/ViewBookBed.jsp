@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BookBed Request</title>
         <style>
             header{
                 background-color: #FF7F50;
@@ -179,7 +179,8 @@
                         <th>Booked Date</th>
                         <th>Booked_Checkout</th>
                         <th>Bednumber</th> 
-                        <th>Semester</th>
+                        <th>Number of Semester</th>
+                        <th>Year</th>
                         <th>Status</th>
                     </tr>
                     <c:set var="rid" value=""></c:set>
@@ -191,7 +192,8 @@
                             <td>${r.booked_date}</td>
                             <td>${r.date_checkout}</td>
                             <td>${r.bed.number}</td>
-                            <td>${r.semester.id}</td>
+                            <td>${r.semester.numbersemester}</td>
+                            <td>${r.semester.year}</td>
                             <td>
                                 <c:if test="${r.status == 0}">
                                      <c:set var="rid" value="${rid.concat(r.student.id).concat(',').concat(r.semester.id).concat(',')}"></c:set>
